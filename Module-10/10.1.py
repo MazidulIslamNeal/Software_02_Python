@@ -1,41 +1,30 @@
 class Elevator:
-    def __init__(self, bottom_floor, top_floor):
-        self.current_floor = bottom_floor
-        self.bottom_floor = bottom_floor
-        self.top_floor = top_floor
+    def __init__(self, bottom_floor_num, top_floor_num):
+        self.bottom_floor_num = bottom_floor_num
+        self.top_floor_num = top_floor_num
+        self.current = bottom_floor_num
 
-    def go_to_floor(self, target_floor):
-        if target_floor < self.bottom_floor or target_floor > self.top_floor:
-            print("Invalid floor request")
-            return
+    def go_to_floor(self, floor_to_go):
+        while self.current < floor_to_go:
+            self.floor_up()
 
-        while self.current_floor != target_floor:
-            if self.current_floor < target_floor:
-                self.floor_up()
-            else:
-                self.floor_down()
+        while self.current > floor_to_go:
+            self.floor_down()
 
     def floor_up(self):
-        if self.current_floor < self.top_floor:
-            self.current_floor += 1
-            print(f"Elevator is now on floor {self.current_floor}")
-        else:
-            print("Already at the top floor")
+        self.current += 1
+        print(f"You are in floor number {self.current} now!")
+
 
     def floor_down(self):
-        if self.current_floor > self.bottom_floor:
-            self.current_floor -= 1
-            print(f"Elevator is now on floor {self.current_floor}")
-        else:
-            print("Already at the bottom floor")
+        self.current -= 1
+        print(f"You are in floor number {self.current} now!")
 
-# Testing the Elevator class
-if __name__ == "__main__":
-    # Creating an elevator from the 1st floor to the 10th floor
-    elevator = Elevator(bottom_floor=1, top_floor=10)
 
-    # Moving to the 5th floor
-    elevator.go_to_floor(5)
+h = Elevator(0,10)
 
-    # Moving back to the bottom floor
-    elevator.go_to_floor(1)
+h.go_to_floor(5)
+h.go_to_floor(10)
+h.go_to_floor(9)
+h.go_to_floor(2)
+h.go_to_floor(8)
